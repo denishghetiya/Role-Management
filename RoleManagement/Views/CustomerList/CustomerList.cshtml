@@ -1,0 +1,47 @@
+﻿@model RoleManagement.ViewModels.CustomerListPageViewModel
+
+@{
+    ViewData["Title"] = "Customer List";
+}
+
+<button onclick="Dashboard()" class="btn btn-success mb-3">Go to Dashboard</button>
+
+<h2>Customer List</h2>
+
+@if (Model.Add)
+{
+    <a style="float: right;" class="btn btn-primary mb-3" asp-action="Create">Add New Customer</a>
+}
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Customer Name</th>
+            <th>Product Name</th>
+            <th>Amount</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var customer in Model.Customers)
+        {
+            <tr>
+                <td>@customer.CustomerName</td>
+                <td>@customer.ProductName</td>
+                <td>@customer.Amount</td>
+                <td>
+                    @if (Model.Edit)
+                    {
+                        <a class="btn btn-sm btn-info" asp-action="Edit" asp-route-id="@customer.CustomerId">Edit</a>
+                    }
+                    @if (Model.Delete)
+                    {
+                        <button onclick="DeleteCustomer(@customer.CustomerId)" class="btn btn-sm btn-danger">Delete</button>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<script src="~/js/site.js"></script>

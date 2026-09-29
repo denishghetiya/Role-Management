@@ -1,0 +1,41 @@
+﻿@model RoleManagement.ViewModels.RolePermissionViewModel
+
+<h2>Edit Permissions for @Model.Username</h2>
+
+<form asp-action="EditUserPermissions" method="post">
+    <input type="hidden" asp-for="UserId" />
+    <table class="table" id="permissions-table" data-count="@Model.Permissions.Count">
+        <thead>
+            <tr>
+                <th>Page</th>
+                <th>Add</th>
+                <th>Edit</th>
+                <th>EditPermission</th>
+                <th>Delete</th>
+                <th>View</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (int i = 0; i < Model.Permissions.Count; i++)
+            {
+                <tr>
+                    <td>
+                        @Model.Permissions[i].PageName
+                        <input type="hidden" asp-for="@Model.Permissions[i].PageId" />
+                    </td>
+                    <td><input type="checkbox" id="add_@i" asp-for="@Model.Permissions[i].Add" /></td>
+                    <td><input type="checkbox" id="edit_@i" asp-for="@Model.Permissions[i].Edit" /></td>
+                    <td><input type="checkbox" id="editpermission_@i" asp-for="@Model.Permissions[i].EditPermission" /></td>
+                    <td><input type="checkbox" id="delete_@i" asp-for="@Model.Permissions[i].Delete" /></td>
+                    <td><input type="checkbox" id="view_@i" asp-for="@Model.Permissions[i].View" /></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <button type="submit" class="btn btn-primary mt-2">Save Changes</button>
+</form>
+
+<button onclick="UserList()" class="btn btn-secondary mt-2">Cancel</button>
+
+<script src="~/js/site.js"></script>
+

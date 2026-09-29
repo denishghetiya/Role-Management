@@ -1,0 +1,25 @@
+﻿@model RoleManagement.ViewModels.UserRoleListViewModel
+
+@{
+    ViewData["Title"] = Model?.RoleId == 0 ? "Add Role" : "Edit Role";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<form asp-action="@(ViewData["Title"].ToString().Contains("Edit") ? "Edit" : "Create")">
+
+    @Html.HiddenFor(model => model.RoleId)
+
+    <div class="form-group">
+        <label asp-for="RoleName"></label>
+        <input asp-for="RoleName" class="form-control" />
+        <span asp-validation-for="RoleName" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-success mt-2">Save</button>
+
+</form>
+
+<button onclick="UserRoleList()" class="btn btn-secondary mt-2">Cancel</button>
+
+<script src="~/js/site.js"></script>

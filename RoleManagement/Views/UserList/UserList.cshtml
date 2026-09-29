@@ -1,0 +1,41 @@
+﻿@model RoleManagement.ViewModels.CreateUserListPageViewModel
+
+<button onclick="Dashboard()" class="btn btn-success mb-3">Go to Dashboard</button>
+
+@if (Model.Add)
+{
+    <button onclick="CreateUser()" class="btn btn-primary mb-3">Create New User</button>
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Username</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model.Users)
+        {
+            <tr>
+                <td>@user.Username</td>
+                <td>
+                    @if (Model.EditPermission)
+                    {
+                        <a class="btn btn-sm btn-warning" href="@Url.Action("EditUserPermissions", new { userId = user.UserId })">Edit Permissions</a>
+                    }
+                    @if (Model.Edit)
+                    {
+                        <a class="btn btn-sm btn-primary" href="@Url.Action("EditUser", new { userId = user.UserId })">Edit User</a>
+                    }
+                    @if (Model.Delete)
+                    {
+                        <button onclick="DeleteUser(@user.UserId)" class="btn btn-sm btn-danger">Delete</button>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<script src="~/js/site.js"></script>

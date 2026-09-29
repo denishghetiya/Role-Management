@@ -1,0 +1,43 @@
+﻿@model RoleManagement.ViewModels.UserRoleListPageViewModel
+
+@{
+    ViewData["Title"] = "User Role";
+}
+
+<button onclick="Dashboard()" class="btn btn-success mb-3">Go to Dashboard</button>
+
+<h2>User Role</h2>
+
+@if (Model.Add)
+{
+    <a style="float: right;" class="btn btn-primary mb-3" asp-action="Create">Add New Role</a>
+}
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Role Name</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var role in Model.UserRoles)
+        {
+            <tr>
+                <td>@role.RoleName</td>
+                <td>
+                    @if (Model.Edit)
+                    {
+                        <a class="btn btn-sm btn-info" asp-action="Edit" asp-route-id="@role.RoleId">Edit</a>
+                    }
+                    @if (Model.Delete)
+                    {
+                        <button onclick="DeleteUserRole(@role.RoleId)" class="btn btn-sm btn-danger">Delete</button>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<script src="~/js/site.js"></script>
